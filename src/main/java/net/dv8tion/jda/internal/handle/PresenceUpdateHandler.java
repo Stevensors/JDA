@@ -114,8 +114,10 @@ public class PresenceUpdateHandler extends SocketHandler
 
         //The member is already cached, so modify the presence values and fire events as needed.
 
-        if (presence.getOnlineStatus() != status)
-        {
+        // Now this will always send a UserUpdateOnlineStatusEvent for every clientstatus change, even if it doesnt
+        // change the visible status.
+//        if (presence.getOnlineStatus() != status)
+//        {
             OnlineStatus oldStatus = presence.getOnlineStatus();
             presence.setOnlineStatus(status);
             if (member != null)
@@ -126,7 +128,7 @@ public class PresenceUpdateHandler extends SocketHandler
                         getJDA(), responseNumber,
                         member, oldStatus));
             }
-        }
+//        }
         return null;
     }
 
